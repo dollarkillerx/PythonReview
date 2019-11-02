@@ -28,6 +28,7 @@ func Get(url *C.char) *C.char {
 		return C.CString("")
 	}
 	return C.CString(string(bytes))
+	//return url
 }
 
 func main() {
