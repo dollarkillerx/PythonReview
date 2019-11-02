@@ -107,3 +107,18 @@ def f1(name):
 if __name__ == '__main__':
     f1("sd")
 ```
+class 装饰器
+```python
+class ms:
+    @staticmethod
+    def test(name):
+        def decorator(func):
+            print("=============")
+            return func
+
+        return decorator
+
+@ms.test('name') # 默认会执行
+def f2():
+    print("this is f2")
+```

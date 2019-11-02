@@ -11,20 +11,17 @@ def decorator(func):
         func(*args, **kw)
 
     return wrapper
+    # return func
 
 
 class ms:
-    def __init__(self, func):
-        self.__func = func
+    @staticmethod
+    def test(name):
+        def decorator(func):
+            print("=============")
+            return func
 
-    def __call__(self, *args, **kwargs):
-        def wrapper(*args, **kwargs):
-            self.__func(*args, **kwargs)
-
-        return wrapper()
-
-    def test(self, name):
-        print(name)
+        return decorator
 
 
 @decorator
@@ -32,7 +29,7 @@ def f1(name):
     print('this is a function', name)
 
 
-@ms.test("name")
+@ms.test('name') # 默认会执行
 def f2():
     print("this is f2")
 
