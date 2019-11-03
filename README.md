@@ -122,3 +122,31 @@ class ms:
 def f2():
     print("this is f2")
 ```
+
+### Py3.6 协程
+https://www.cnblogs.com/hello-init/p/10375063.html
+
+### 开始Django学习
+- 基础 Django View Url Template ORM
+- 扩展 Sqlalchemy Redis Mongodb Jinja2 Mako
+
+### PipEnv
+```bash 
+pip3 install pipenv
+pipenv install  # 带当前目录创建虚拟环境
+pipenv shell    # 进入虚拟化环境
+exit            # 退出虚拟环境
+pipenv install  package   # 安装包
+pipenv uninstall package  # 卸载包
+pipenv graph    # 环境依赖
+```
+清华大学PIP源：https://pypi.tuna.tsinghua.edu.cn/simple/
+### Django基础命令
+- django-admin startproject 项目名称 -> 创建一个django项目
+- python manage.py startapp 应用名 -> 项目中创建一个应用
+- python manage.py shell -> 进入调试模式
+- python manage.py makemigrations -> 数据库创建更改文件
+- python manage.py migrate -> 同步到数据库进行更新
+- python manage.py flush -> 清空数据库
+- python manage.py runserver 0.0.000.0:8000 -> 启动开发服务器
+- python manage.py 查看更多命令
