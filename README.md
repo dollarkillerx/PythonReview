@@ -122,6 +122,34 @@ class ms:
 def f2():
     print("this is f2")
 ```
+class 装饰器2
+```python 
+class Concurrent:
+    @staticmethod
+    def sync():
+        def decorator(func):
+            def war(*args, **kw):
+                print("hello")
+                func(*args, **kw)
+
+            return war
+
+        return decorator
+
+
+# 下面是test
+@Concurrent.sync()
+def f1(name):
+    print(name)
+
+
+if __name__ == '__main__':
+    '''
+    this is test
+    '''
+    f1("hello")
+```
+
 
 ### Py3.6 协程
 https://www.cnblogs.com/hello-init/p/10375063.html
@@ -150,3 +178,103 @@ pipenv graph    # 环境依赖
 - python manage.py flush -> 清空数据库
 - python manage.py runserver 0.0.000.0:8000 -> 启动开发服务器
 - python manage.py 查看更多命令
+
+### 基础入门
+```bash 
+pip3 install django
+django-admin createproject project_name
+cd project_name
+django createapp app
+django runserver
+```
+- app/views.py
+```python 
+from django.http import HttpResponse
+def hello(request):
+    return HttpResponse("Hello")
+```
+- `touch app/urls.py`
+```python 
+from django.conf.urls import url
+from .view import hello
+urlpatterns = [
+    url('',hello)
+]
+```
+- project_name/urls.py
+```python 
+from django.contrib import admin
+from django.urls import path, include
+
+from app import urls as app_urls
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('app/', include(app_urls))
+]
+```
+## 参数获取
+### Url参数获取
+- 以?形式
+```python 
+request.GET.get(参数名称)
+```
+- 以分隔符信息
+``` python
+def index(request,参数名,参数名):
+    print(参数名)
+#   path('he/<str:name>/<int:age>',ppc)
+```
+- 获取POST类容
+```python 
+request.POST
+```
+- 获取path路径
+```python 
+request.path
+```
+- 获取请求方法
+```python 
+request.method
+```
+- 获取请求cookie
+``` 
+request.COOKIES
+```
+- 请求用户对象
+``` 
+request.user
+```
+- 获取session
+``` 
+request.session
+```
+- 获取meta
+``` 
+request.META
+```
+### 常用返回对象
+- HttpResponse 可以直接返回一些字符串内容
+- render 将数据在模板中渲染并显示
+- JsonResponse 返回一个json类型
+``` python
+from django.http import HttpResponse
+from django.http.shortcuts import render
+from django.http impor JsonResponse
+```
+### 视图面向对象的写法
+```python 
+from django.views.generic import View
+Class Test(View):
+    def get(self,request):
+        return xxx
+# path('',Test.as_view())   调用
+```
+
+### Http常用返回状态码
+- 200 ok
+- 400 请求错误
+- 401 未授权
+- 403 权限不够
+- 405 方法禁用
+- 500 Server Error
