@@ -122,3 +122,30 @@ class ms:
 def f2():
     print("this is f2")
 ```
+class 装饰器2
+```python
+class Concurrent:
+    @staticmethod
+    def sync():
+        def decorator(func):
+            def war(*args, **kw):
+                print("hello")
+                func(*args, **kw)
+
+            return war
+
+        return decorator
+
+
+# 下面是test
+@Concurrent.sync()
+def f1(name):
+    print(name)
+
+
+if __name__ == '__main__':
+    '''
+    this is test
+    '''
+    f1("hello")
+```
