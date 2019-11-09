@@ -3,3 +3,4 @@
 *.so
 venv/
 venv
+.vscode

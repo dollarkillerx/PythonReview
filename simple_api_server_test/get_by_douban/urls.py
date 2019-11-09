@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import Music
+from .views import Music,Book
 urlpatterns = [
-    path('',Music.as_view())
+    path('music/',Music.as_view()),
+    path('book/',Book.as_view())
 ]
