@@ -379,3 +379,27 @@ empty                为空的情况
 ```
 
 ### 内置过滤器
+常用过滤器:
+![内置常用过滤器](./README/firter.png)
+![内置常用过滤器](./README/firter2.png)
+自定义过滤器:
+- 在应用下创建templatetags文件夹
+- 在文件夹下创建myfilter.py
+```python
+from django import template
+register = template.Library() # 定义过滤器
+
+@register.filter
+def test_filter(value,args):
+    """
+    value 传过来的值
+    aargs 参数
+    """
+    return value + args
+
+# 使用  方法添加了要重启才会被识别
+{% load myfilter %}
+{{data|test_filter:3}}
+```
+
+### Djangomodel

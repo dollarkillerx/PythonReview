@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load myfilter %}
 <!-- 引用basehtml -->
 {% load static %}
 <!-- 加载静态文件标签 -->
@@ -20,4 +21,6 @@
     {% endfor %}
 
     {% csrf_token %}
+
+    {{name|appc}}
 {% endblock %}
