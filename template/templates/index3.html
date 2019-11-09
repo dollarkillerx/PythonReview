@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+<!-- 引用basehtml -->
+{% load static %}
+<!-- 加载静态文件标签 -->
+
+<!-- 重写css style -->
+{% block css_style %}
+    <link rel="stylesheet" href="{% static 'index.css' %}" />
+{% endblock %}
+
+{% block title %}
+    这个重写 base中的内容
+{% endblock %}
+
+{% block content %}
+    {% for i in array %}
+    {{i}}
+    {% empty %}
+    this is empty
+    {% endfor %}
+
+    {% csrf_token %}
+{% endblock %}

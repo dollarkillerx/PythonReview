@@ -278,3 +278,104 @@ Class Test(View):
 - 403 权限不够
 - 405 方法禁用
 - 500 Server Error
+
+### Template 配置方法
+```python
+from django.shortcuts import render
+from django.views.generic import View
+
+class Index(View):
+    TEMPLATE = 'index.html'
+    def get(selef,request,name):
+        return render(request,Index.TEMPLATE,{"name":name})
+```
+- 模板标签
+```python
+{% for %} {% endfor %}                遍历输出内容
+{% if %} {% elif %} {% endif %}       对遍历进行条件判断
+{% url name args %}                   对遍历进行条件判断
+
+{% load %}                            加载django的标签库 
+{% load static %}
+
+{% static static_path %}              读取静态资源
+{% extends base_template %}           模板继承
+
+{% block data %}  {% endblock %}      重写父模板的代码
+{% csrf_token %}                      跨域的秘钥
+```
+- for标签模板
+```python
+forloop.counter      重1开始计算获取当前索引
+forloopcounter()     从0开始计算获取当前索引
+forloop.revcounter   索引从最大数递减到
+forloop.revcounter() 索引从最大数递减到0
+forloop.first        当前元素是否是第一个
+forloop.last         当前元素是否是最后一个
+empty                为空的情况
+```
+- 静态文件配置
+    - 项目根目录创建 'static' 与 'templates'
+    - `STATICFILES_DIRS=(os.path.join(BASE_DIR,'static'),)`
+
+- 演示
+```html
+{% load static %}  // 加载静态文件东西
+
+ {% for item in array %}
+        <li>{{item}} ------- {{forloop.counter}}   -------    {{forloop.counter}}   ----  {{forloop.revcounter}}</li>
+        
+        {% if forloop.first %}       // 如果是第一个
+            this is first 
+        {% elif forloop.last %}      // 如果是第最后一个
+            this is last
+        {% endif %}
+
+        {% empty %}                  // 如果是空
+        this is empty
+        {%  endfor  %}
+
+    <a href="{% url 'index' 'emp' %}">return</a>              // url映射
+    <link rel="stylesheet" href="{% static 'index.css' %}"/>  // 映射静态资源地址
+```
+- 模板继承相关
+```html
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>模板继承相关 {% block title %}  {% endblock %}</title>
+        <!-- css相关定义 -->
+        {% block css_style %}
+        {% endblock %}
+    {% endblock %}
+</head>
+<body>
+    {% block content %}
+    {% endblock %}
+
+    {% block js_script %}
+    {% endblock %}
+</body>
+```
+
+```html
+{% extends 'base.html' %}
+<!-- 引用basehtml -->
+{% load static %}
+<!-- 加载静态文件标签 -->
+
+<!-- 重写css style -->
+{% block css_style %}
+    <link rel="stylesheet" href="{% static 'index.css' %}" />
+{% endblock %}
+
+{% block title %}
+    这个重写 base中的内容
+{% endblock %}
+
+# 注意这里是追加 不是重写 (⊙o⊙)…
+```
+
+### 内置过滤器

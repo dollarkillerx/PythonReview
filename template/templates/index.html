@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    阿罗哈
+    {{name}}
+
+    <ul>
+        {% for item in array %}
+        <li>{{item}} ------- {{forloop.counter}}   -------    {{forloop.counter}}   ----  {{forloop.revcounter}}</li>
+        
+        {% if forloop.first %}
+            this is first
+        {% elif forloop.last %}
+            this is last
+        {% endif %}
+
+        {% empty %}
+        this is empty
+        {%  endfor  %}
+    </ul>
+
+    <a href="{% url 'index' 'emp' %}">return</a>
+    <link rel="stylesheet" href="{% static 'index.css' %}"/>
+</body>
+</html>
