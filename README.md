@@ -402,4 +402,23 @@ def test_filter(value,args):
 {{data|test_filter:3}}
 ```
 
-### Djangomodel
+### DjangoModel
+- 在settings.py 中配置数据库信息
+- 在应用app的models.py中以类的形式定义模型
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',           # 数据库引擎
+        'NAME': 'djangotest',                           # 数据库名称
+        'USER': 'root',                                 # 数据库用户名
+        'PASSWORD': '123456',                           # 数据库密码
+        'HOST': '127.0.0.1',                            # 数据库地址 默认localhost
+        'PORT': '3306',                                 # 数据库端口
+    }
+}
+```
+生成模型
+```python
+python manage.py makemigrateions  # 在migrate文件夹下生成initialpy脚本文件
+python manage.py migrate          # 将initialpy脚本中的代码执行，生成相对应的数据表
+```
